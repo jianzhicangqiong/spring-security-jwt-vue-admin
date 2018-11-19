@@ -1,0 +1,46 @@
+server:
+  tomcat:
+    protocol-header: x-forwarded-proto
+    use-relative-redirects: true
+
+spring:
+  profiles:
+    active: dev
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+    time-zone: UTC
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+
+# JWT 认证配置
+jwt:
+  tokenHeader: Authorization   #请求头
+  secret: w-eyJleHAiOjE1NDMyMDUyODUsInN1YiI6ImFkbWluIiwiY3JlYXRlZCI6MTU0MDYxMzI4N  #加密的字符串
+  expiration: 1200000    #毫秒，这里默认20分钟
+  tokenHead: "Bearer "
+  exceptUrl: "/auth/**"
+  route:
+    login: /auth/login
+    refresh: /auth/refresh
+    client: /auth/login
+
+management:
+  endpoints:
+    web:
+      exposure:
+       include: shutdown
+  endpoint:
+    shutdown:
+      enabled: true
