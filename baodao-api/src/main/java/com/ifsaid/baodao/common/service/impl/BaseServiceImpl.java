@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +23,7 @@ import java.util.Optional;
  */
 
 @Slf4j
+@Service
 public class BaseServiceImpl<T extends BaseEntity, ID, R extends JpaRepository> implements IBaseService<T, ID> {
 
     @Autowired
